@@ -34,7 +34,7 @@ for movie_num in [1, 251, 501, 751]:
     print("scraping movies", str(movie_num), "-", str(movie_num+250))
 
     # get request from IMDb "Top 1000" Movies by Rating URL (set to 250 movies per page)
-    response = get('https://www.imdb.com/search/title/?groups=top_1000&sort=user_rating,desc&count=250&start=' + str(start_page) + '&ref_=adv_nxt', headers = headers)
+    response = get('https://www.imdb.com/search/title/?groups=top_1000&sort=user_rating,desc&count=250&start=' + str(movie_num) + '&ref_=adv_nxt', headers = headers)
 
     # pause the loop for 4-8 seconds
     sleep(randint(4,8))
