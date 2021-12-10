@@ -85,6 +85,7 @@ for movie_num in [1, 251, 501, 751]:
         directors.append(director)
         # get stars
         stars_list = [name.text for name in movie.findAll('p')[2].findAll('a')][1:]
+        stars_list = ' '.join(stars_list) # convert list to string
         stars.append(stars_list)
         # get runtimes
         runtime = movie.find('span', class_ = 'runtime').text
