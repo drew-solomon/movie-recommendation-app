@@ -21,6 +21,7 @@ genres = []
 directors = []
 stars = []
 runtimes = []
+descriptions = []
 
 # preparing the monitoring of the loop
 start_time = time()
@@ -89,6 +90,9 @@ for movie_num in [1, 251, 501, 751]:
         runtime = movie.find('span', class_ = 'runtime').text
         runtime  = int(re.sub("[^0-9]", "", runtime)) # keep only the numbers and convert to integer
         runtimes.append(runtime)
+        # get descriptions
+        description = movie.findAll('p')[1].text.strip('\n')
+        descriptions.append(description)
 
 
 # create pandas dataframe with scraped data
@@ -100,7 +104,8 @@ movies_df = pd.DataFrame({
     'genres': genres,
     'directors': directors,
     'stars': stars,
-    'runtime': runtimes
+    'runtime': runtimes,
+    'description': descriptions
 })
 
 # check df info
