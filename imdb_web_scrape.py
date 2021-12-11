@@ -114,3 +114,6 @@ print(movies_df.info())
 
 # show head of movies df
 movies_df.head(20)
+
+# save movies dataframe as .csv
+movies_df.to_csv('movies_df.csv')
