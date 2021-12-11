@@ -38,7 +38,7 @@ def combine_features(row):
 
 # remove null values in text features
 for feature in text_features:
-    movies_df[feature] = movies_dfs[feature].fillna('')
+    movies_df[feature] = movies_df[feature].fillna('')
 
 # combine text features
 movies_df["combined_features"] = movies_df.apply(combine_features,axis=1)
@@ -106,3 +106,5 @@ def k_most_similar_movies(movie, K):
   # get test movie recs
   test_movie_recs = k_most_similar_movies('The Dark Knight', 10)
   print(test_movie_recs)
+
+  print("done")

@@ -103,7 +103,7 @@ movies_df = pd.DataFrame({
     'rating': ratings,
     'vote_count': votes,
     'genres': genres,
-    'directors': directors,
+    'director': directors,
     'stars': stars,
     'runtime': runtimes,
     'description': descriptions
