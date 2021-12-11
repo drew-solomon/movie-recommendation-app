@@ -12,6 +12,9 @@
 # import data from web scraping
 import imdb_web_scrape
 
+# get movies dataframe
+movies_df = imdb_web_scrape.movies_df
+
 # import libraries
 import pandas as pd
 import gdown
