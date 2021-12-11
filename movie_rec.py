@@ -9,9 +9,6 @@
 # and min vote count is > 25'000 in this dataset there's
 # no need to weight ratings to avoid low vote outliers.
 
-# import data from web scraping
-from imdb_web_scrape import movies_df
-
 # import libraries
 import pandas as pd
 import gdown
@@ -19,6 +16,8 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+# get scraped movies dataframe
+movies_df = pd.read_csv('movies_df.csv')
 
 # choose text features for movie vectorization
 text_features = ['genres','description','stars','director']
@@ -71,7 +70,7 @@ def k_largest_indices(sim_list, K):
     return similar_movies_indices
 
 # function to return list of k most similar movies from given movie title
-def k_most_similar_movies(movie, K):
+def get_k_most_similar_movies(movie, K):
     # convert movies into movie vectors
     movie_vectors = vectorize(movies_df)
     # compute cosine similarity between movie vectors
@@ -100,6 +99,6 @@ test_movie = 'The Dark Knight'
 print("Test movie:", test_movie)
 
 # get test movie recs
-test_movie_recs = k_most_similar_movies('The Dark Knight', 10)
+test_movie_recs = get_k_most_similar_movies('The Dark Knight', 10)
 print(test_movie_recs)
 
