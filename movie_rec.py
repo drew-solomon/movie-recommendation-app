@@ -9,6 +9,8 @@
 # and min vote count is > 25'000 in this dataset there's
 # no need to weight ratings to avoid low vote outliers.
 
+# import data from web scraping
+import imdb_web_scrape
 
 # import libraries
 import pandas as pd
