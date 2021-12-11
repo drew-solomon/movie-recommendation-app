@@ -12,9 +12,6 @@
 # import data from web scraping
 from imdb_web_scrape import movies_df
 
-# print data head
-print(movies_df.head(10))
-
 # import libraries
 import pandas as pd
 import gdown
@@ -33,7 +30,7 @@ numerical_features = ['year', 'runtime']
 def combine_features(row):
     combined_row = ''
     for feature in text_features:
-      combined_row += row[feature]
+        combined_row += row[feature]
     return combined_row
 
 # remove null values in text features
@@ -45,66 +42,64 @@ movies_df["combined_features"] = movies_df.apply(combine_features,axis=1)
 
 # function to convert features into movie vectors
 def vectorize(data):
-  # create count vectorizer (for text features) which removes English stop-words
-  cv = CountVectorizer(stop_words='english') 
-  # vectorize movie text features (counts occurences of each unique word in word by text sample matrix)
-  count_matrix = cv.fit_transform(data["combined_features"])
-  # convert text vectors to array
-  text_vectors = count_matrix.toarray()
-  # get numerical features
-  numerical = movies_df[numerical_features].to_numpy()
-  # normalize numerical features
-  numerical = (numerical - numerical.min(axis=0)) / (numerical.max(axis=0) - numerical.min(axis=0))
-  # concatenate text vectors with numerical vectors to create movie vectors
-  movie_vectors = np.concatenate((text_vectors, numerical), axis=1)
+    # create count vectorizer (for text features) which removes English stop-words
+    cv = CountVectorizer(stop_words='english') 
+    # vectorize movie text features (counts occurences of each unique word in word by text sample matrix)
+    count_matrix = cv.fit_transform(data["combined_features"])
+    # convert text vectors to array
+    text_vectors = count_matrix.toarray()
+    # get numerical features
+    numerical = movies_df[numerical_features].to_numpy()
+    # normalize numerical features
+    numerical = (numerical - numerical.min(axis=0)) / (numerical.max(axis=0) - numerical.min(axis=0))
+    # concatenate text vectors with numerical vectors to create movie vectors
+    movie_vectors = np.concatenate((text_vectors, numerical), axis=1)
 
-  # return movie vectors
-  return movie_vectors
+    # return movie vectors
+    return movie_vectors
 
 # function to get the indices of k most similar movies from list of similarity ratings for given movie
 def k_largest_indices(sim_list, K):
-  # convert similarity ratings for given movie to list of index, value pairs
-  similar_movies = list(enumerate(sim_list))
-  # sort similar movies by similarity rating
-  sorted_similar_movies = sorted(similar_movies,key=lambda x:x[1],reverse=True)[1:]
-  # keep only the first k most similar movies indices
-  similar_movies_indices = [x[0] for x in sorted_similar_movies[:K]]
- 
-  # return list of k most similar movies indices
-  return similar_movies_indices
+    # convert similarity ratings for given movie to list of index, value pairs
+    similar_movies = list(enumerate(sim_list))
+    # sort similar movies by similarity rating
+    sorted_similar_movies = sorted(similar_movies,key=lambda x:x[1],reverse=True)[1:]
+    # keep only the first k most similar movies indices
+    similar_movies_indices = [x[0] for x in sorted_similar_movies[:K]]
+
+    # return list of k most similar movies indices
+    return similar_movies_indices
 
 # function to return list of k most similar movies from given movie title
 def k_most_similar_movies(movie, K):
-  # convert movies into movie vectors
-  movie_vectors = vectorize(movies_df)
-  # compute cosine similarity between movie vectors
-  similarity_matrix = cosine_similarity(movie_vectors)
-  # get index for given movie title
-  movie_index = movies_df[movies_df.movie == movie].index.values[0]
-  # get list of similarity ratings for the given movie
-  similarity_to_movie = similarity_matrix[movie_index] 
-  # get the indices of the k most similar movies
-  k_similar_movies = k_largest_indices(similarity_to_movie, K)
+    # convert movies into movie vectors
+    movie_vectors = vectorize(movies_df)
+    # compute cosine similarity between movie vectors
+    similarity_matrix = cosine_similarity(movie_vectors)
+    # get index for given movie title
+    movie_index = movies_df[movies_df.movie == movie].index.values[0]
+    # get list of similarity ratings for the given movie
+    similarity_to_movie = similarity_matrix[movie_index] 
+    # get the indices of the k most similar movies
+    k_similar_movies = k_largest_indices(similarity_to_movie, K)
 
-  # create list for movie recommendations
-  movie_recs = []
+    # create list for movie recommendations
+    movie_recs = []
 
-  # loop through k most similar movies and add to list of recommended movies
-  for index in k_similar_movies:
-    # get movie title from index
-    movie_title = movies_df[movies_df.index == index]["movie"].values[0]
-    # add movie to list of movie names
-    movie_recs.append(movie_title)
+    # loop through k most similar movies and add to list of recommended movies
+    for index in k_similar_movies:
+        # get movie title from index
+        movie_title = movies_df[movies_df.index == index]["movie"].values[0]
+        # add movie to list of movie names
+        movie_recs.append(movie_title)
+    # return dataframe of movie recommendations
+    return pd.DataFrame({'recommended_movies': movie_recs})
 
-  # return dataframe of movie recommendations
-  return pd.DataFrame({'recommended_movies': movie_recs})
+# example movie recommendation
+test_movie = 'The Dark Knight'
+print("Test movie:", test_movie)
 
-  # example movie recommendation
-  test_movie = 'The Dark Knight'
-  print("Test movie:", test_movie)
-  
-  # get test movie recs
-  test_movie_recs = k_most_similar_movies('The Dark Knight', 10)
-  print(test_movie_recs)
+# get test movie recs
+test_movie_recs = k_most_similar_movies('The Dark Knight', 10)
+print(test_movie_recs)
 
-  print("done")
