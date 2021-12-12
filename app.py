@@ -13,17 +13,21 @@ movies_df = pd.read_csv('movies_df.csv')
 # set marks for slider
 marks = {1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9', 10: '10'}
 
-
 app = dash.Dash(__name__)
 
 #  dropdown menu for movies
 app.layout = html.Div([
+    html.H2("Movie Recommender",id="title"),
+    html.H3("Find similar movies to the ones you love, from:",id="subtitle"),
+    html.A('IMDb Top 1000 Movies (by User Rating)', href='https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating', target="_blank"),
+    html.H4("Pick any movie you liked below:",id="pick_movie"),
     dcc.Dropdown(
         id='movie-dropdown',
         options=[{'label': i, 'value': i} for i in list(movies_df['movie'])],
         value = 'The Dark Knight',
         placeholder="Pick any movie you liked!",
     ),
+    html.H4("How many movie recommendations do you want?",id="pick_k"),
     # slider for number of movie recs
     dcc.Slider(
     id='slider',
@@ -37,6 +41,7 @@ app.layout = html.Div([
         id='table',
         columns=[],
         data= [],
+        style_cell={'textAlign': 'left'},
     )
 ])
 
