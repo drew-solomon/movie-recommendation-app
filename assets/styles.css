@@ -1,0 +1,25 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    font-family:Helvetica, sans-serif;
+    font-stretch: wider;
+    font-weight:1000;
+    color:rgb(20, 20, 20);
+    outline-color:grey;
+    background-color:cornsilk;
+    style={"width": "100%"}
+}
+
+.slider {
+    width: 400px;
+    flex: auto;
+    align-self: center;
+}
+
+.menu {
+    width: 400px;
+    flex: auto;
+    align-self: center;
+}

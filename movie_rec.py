@@ -92,7 +92,7 @@ def get_k_most_similar_movies(movie, K):
         # add movie to list of movie names
         movie_recs.append(movie_title)
     # return dataframe of movie recommendations
-    return pd.DataFrame({'recommended_movies': movie_recs})
+    return pd.DataFrame({'Recommended Movies': movie_recs})
 
 # example movie recommendation
 test_movie = 'The Dark Knight'
