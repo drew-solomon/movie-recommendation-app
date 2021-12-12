@@ -20,6 +20,7 @@ app.layout = html.Div(
     className="main",
     children=[
     html.H2("Movie Recommender",id="title"),
+    html.Img(src='https://tritonvoice.co/wp-content/uploads/2019/03/GKKFYsUV3HipHYUtKTrUPeiz.png', style={'height':'60%', 'width':'60%'}),
     html.H3("Find similar movies to the ones you love, from:",id="subtitle"),
     html.A('IMDb Top 1000 Movies (by User Rating)', href='https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating', target="_blank"),
     html.H4("Pick any movie you liked below:",id="pick_movie"),
@@ -52,8 +53,11 @@ app.layout = html.Div(
             'font-size':15, 
             'color':'dimgray',
             },
-    )
+    ),
+    html.H4("Enjoy!",id="enjoy"),
+    html.Img(src='https://www.cppng.com/file/download/2020-06/23321-9-popcorn-transparent-background.png', style={'height':'60%', 'width':'60%'}),
     ]
+    
 )
 
 
