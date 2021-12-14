@@ -22,6 +22,8 @@ directors = []
 stars = []
 runtimes = []
 descriptions = []
+movie_urls = []
+movie_poster_urls = []
 
 # preparing the monitoring of the loop
 start_time = time()
@@ -118,6 +120,21 @@ movies_df = pd.DataFrame({
     'movie_url': movie_urls, 
     'poster_url': movie_poster_urls
 })
+
+#format urls as markdown hyperlinks
+def make_urls_links(df):
+    title_links = []
+    # loop through and convert to hyperlink markdown format
+    for index, url in enumerate(df["movie_url"].to_list()):
+      title = df['movie'][index]
+      link = '[' + title + ']' + '(' + str(url) + ')'
+      title_links.append(link)
+
+    return title_links
+
+# add column for title links
+make_urls_links(movies_df)
+movies_df['title_link'] = make_urls_links(movies_df)
 
 # check df info
 print(movies_df.info())

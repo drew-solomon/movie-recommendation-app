@@ -76,7 +76,7 @@ def update_output(input_movie, input_k):
     movie_recs_dict = movie_recs_df.to_dict('records')
 
     # movie rec columns
-    movie_recs_columns = [{"name": i, "id": i} for i in movie_recs_df.columns]
+    movie_recs_columns = [{"name": i, "id": i,'type':'text', "presentation":"markdown"} for i in movie_recs_df.columns]
 
     return movie_recs_columns, movie_recs_dict
 	

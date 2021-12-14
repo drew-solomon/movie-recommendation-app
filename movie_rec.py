@@ -87,8 +87,9 @@ def get_k_most_similar_movies(movie, K):
 
     # loop through k most similar movies and add to list of recommended movies
     for index in k_similar_movies:
-        # get movie title from index
-        movie_title = movies_df[movies_df.index == index]["movie"].values[0]
+        # get movie title + link from index
+        movie_title = movies_df[movies_df.index == index]["title_link"].values[0]
+        # convert 
         # add movie to list of movie names
         movie_recs.append(movie_title)
     # return dataframe of movie recommendations
