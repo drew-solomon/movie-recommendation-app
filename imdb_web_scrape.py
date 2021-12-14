@@ -94,6 +94,14 @@ for movie_num in [1, 251, 501, 751]:
         # get descriptions
         description = movie.findAll('p')[1].text.strip('\n')
         descriptions.append(description)
+        # get movie url path
+        movie_url_path = movie.h3.a['href']
+        # create movie url
+        movie_url = 'https://www.imdb.com/' + movie_url_path
+        movie_urls.append(movie_url)
+        # get movie poster .jpg link
+        movie_poster_url = movie.find("img")['loadlate']
+        movie_poster_urls.append(movie_poster_url)
 
 
 # create pandas dataframe with scraped data
@@ -106,7 +114,9 @@ movies_df = pd.DataFrame({
     'director': directors,
     'stars': stars,
     'runtime': runtimes,
-    'description': descriptions
+    'description': descriptions,
+    'movie_url': movie_urls, 
+    'poster_url': movie_poster_urls
 })
 
 # check df info
