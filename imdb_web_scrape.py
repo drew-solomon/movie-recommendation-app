@@ -6,6 +6,8 @@ from time import sleep
 from random import randint
 from time import time
 from IPython.core.display import clear_output
+import os
+from supabase_py import create_client, Client
 
 
 
@@ -14,6 +16,7 @@ headers = {"Accept-Language": "en-US, en;q=0.5"}
 
 # create lists for scraped data
 titles = []
+full_titles = []
 years = []
 ratings = []
 votes = []
@@ -72,6 +75,9 @@ for movie_num in [1, 251, 501, 751]:
         year = movie.h3.find('span', class_ = 'lister-item-year text-muted unbold')
         year = int(re.sub("[^0-9]", "", year.text)) # keep numbers only and convert to integer
         years.append(year)
+        # combine year and title for full title
+        full_title = title + " ("+ str(year) + ")"
+        full_titles.append(full_title) 
         # get rating
         rating = float(movie.strong.text)
         ratings.append(rating)
@@ -109,6 +115,7 @@ for movie_num in [1, 251, 501, 751]:
 # create pandas dataframe with scraped data
 movies_df = pd.DataFrame({
     'movie': titles,
+    'movie_year': full_titles,
     'year': years,
     'rating': ratings,
     'vote_count': votes,
@@ -121,8 +128,32 @@ movies_df = pd.DataFrame({
     'poster_url': movie_poster_urls
 })
 
+# check df info
+print(movies_df.info())
+
+# show head of movies df
+movies_df.head()
+
+# save movies dataframe as .csv 
+movies_df.to_csv('movies_df.csv')
+
+# convert dataframe to dictionary
+movies_dict = movies_df.to_dict('records')
+
+# set Supabase project API key and URL
+SUPABASE_URL = "https://bafcrmhipvebnkcghvxt.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzOTU5MDcxNywiZXhwIjoxOTU1MTY2NzE3fQ.ztVsLazyWB150O7ZRJ0yTDVY5hNN1kyzOlD0FdEkL7Q"
+
+# create Supabase client
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# upload movie dict to Supabase database
+supabase.table('imdb_top_movies').insert(movies_dict).execute()
+print("inserted movies to Supabase")
+print(supabase.table('imdb_top_movies').select('movie').execute())
+
 #format urls as markdown hyperlinks
-def make_urls_links(df):
+def make_urls_links_markdown(df):
     title_links = []
     # loop through and convert to hyperlink markdown format
     for index, url in enumerate(df["movie_url"].to_list()):
@@ -133,14 +164,8 @@ def make_urls_links(df):
     return title_links
 
 # add column for title links
-make_urls_links(movies_df)
-movies_df['title_link'] = make_urls_links(movies_df)
+movies_df['title_link'] = make_urls_links_markdown(movies_df)
 
-# check df info
-print(movies_df.info())
-
-# show head of movies df
-movies_df.head(20)
-
-# save movies dataframe as .csv
+# save movies dataframe as .csv 
 movies_df.to_csv('movies_df.csv')
+
