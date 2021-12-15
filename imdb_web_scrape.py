@@ -147,10 +147,17 @@ SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI
 # create Supabase client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-# upload movie dict to Supabase database
+# clear existing movies from Supabase table
+try:
+  supabase.table('top1000_movies').delete().neq("movie_year", "").execute()
+# ignore JSONDecodeError
+except Exception: 
+  pass
+
+# upload newly scraped movies to Supabase table
 supabase.table('imdb_top_movies').insert(movies_dict).execute()
 print("inserted movies to Supabase")
-print(supabase.table('imdb_top_movies').select('movie').execute())
+print("Supabase movie count:", len(supabase.table('imdb_top_movies').select('*').execute()['data']))
 
 #format urls as markdown hyperlinks
 def make_urls_links_markdown(df):
