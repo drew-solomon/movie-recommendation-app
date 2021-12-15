@@ -15,9 +15,34 @@ import gdown
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from supabase_py import create_client, Client
 
-# get scraped movies dataframe
-movies_df = pd.read_csv('movies_df.csv')
+# set my Supabase project URL and API key
+SUPABASE_URL = "https://bafcrmhipvebnkcghvxt.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzOTU5MDcxNywiZXhwIjoxOTU1MTY2NzE3fQ.ztVsLazyWB150O7ZRJ0yTDVY5hNN1kyzOlD0FdEkL7Q"
+
+# create Supabase client
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# pull movie data from Supabase
+movies_dict = supabase.table('imdb_top_movies').select('*').execute()
+
+# convert movie data to dataframe
+movies_df = pd.DataFrame(movies_dict['data'])
+
+#format urls as markdown hyperlinks
+def make_urls_links_markdown(df):
+    title_links = []
+    # loop through and convert to hyperlink markdown format
+    for index, url in enumerate(df["movie_url"].to_list()):
+      title = df['movie'][index]
+      link = '[' + title + ']' + '(' + str(url) + ')'
+      title_links.append(link)
+
+    return title_links
+
+# add column for title links
+movies_df['title_link'] = make_urls_links_markdown(movies_df)
 
 # choose text features for movie vectorization
 text_features = ['genres','description','stars','director']

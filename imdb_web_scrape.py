@@ -6,7 +6,6 @@ from time import sleep
 from random import randint
 from time import time
 from IPython.core.display import clear_output
-import os
 from supabase_py import create_client, Client
 
 
@@ -140,7 +139,7 @@ movies_df.to_csv('movies_df.csv')
 # convert dataframe to dictionary
 movies_dict = movies_df.to_dict('records')
 
-# set Supabase project API key and URL
+# set my Supabase project URL and API key
 SUPABASE_URL = "https://bafcrmhipvebnkcghvxt.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzOTU5MDcxNywiZXhwIjoxOTU1MTY2NzE3fQ.ztVsLazyWB150O7ZRJ0yTDVY5hNN1kyzOlD0FdEkL7Q"
 
@@ -149,7 +148,7 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # clear existing movies from Supabase table
 try:
-  supabase.table('top1000_movies').delete().neq("movie_year", "").execute()
+  supabase.table('imdb_top_movies').delete().neq("movie_year", "").execute()
 # ignore JSONDecodeError
 except Exception: 
   pass
@@ -158,20 +157,6 @@ except Exception:
 supabase.table('imdb_top_movies').insert(movies_dict).execute()
 print("inserted movies to Supabase")
 print("Supabase movie count:", len(supabase.table('imdb_top_movies').select('*').execute()['data']))
-
-#format urls as markdown hyperlinks
-def make_urls_links_markdown(df):
-    title_links = []
-    # loop through and convert to hyperlink markdown format
-    for index, url in enumerate(df["movie_url"].to_list()):
-      title = df['movie'][index]
-      link = '[' + title + ']' + '(' + str(url) + ')'
-      title_links.append(link)
-
-    return title_links
-
-# add column for title links
-movies_df['title_link'] = make_urls_links_markdown(movies_df)
 
 # save movies dataframe as .csv 
 movies_df.to_csv('movies_df.csv')
