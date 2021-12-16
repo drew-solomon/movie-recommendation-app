@@ -1,8 +1,5 @@
 name: imdb_scraper
 on:
-  push:
-    branches:
-      - master
   schedule:
     - cron: '5 * * * *' # runs every 5 minutest (test)
 jobs:
@@ -29,4 +26,4 @@ jobs:
             uses: ad-m/github-push-action@v0.6.0
             with:
               github_token: ${{ secrets.GITHUB_TOKEN }}
-              branch: master
+              branch: main
