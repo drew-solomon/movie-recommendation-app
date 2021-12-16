@@ -10,9 +10,8 @@ jobs:
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content to github runner
           
-      - name: install libraries
-        run: /workspace/movie-rec-dash-app/run.sh
-        shell: bash
+      - name: install python packages
+        run: sh run.sh
 
       - name: run py script # run scrape_data.py to get the latest IMDB top 1000 movie data
         run: python scrape_data.py # data saved to Supabase 
