@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output, State
 from dash import html
 import numpy as np
 import pandas as pd
-import movie_rec # movie recommender functions
+import recommend_movie # movie recommender functions
 
 # read csv of processed movies dataframe
 movies_df = pd.read_csv('movies_df_proc.csv')

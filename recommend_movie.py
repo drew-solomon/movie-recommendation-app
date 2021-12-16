@@ -65,7 +65,7 @@ for feature in text_features:
 movies_df["combined_features"] = movies_df.apply(combine_features,axis=1)
 
 # save processed movies df
-movies_df.to_csv('movies_df_proc.csv')
+movies_df.to_csv('data/movies_df_proc.csv')
 
 # function to convert features into movie vectors
 def vectorize(data):

@@ -8,8 +8,6 @@ from time import time
 from IPython.core.display import clear_output
 from supabase_py import create_client, Client
 
-
-
 # set headers language to English to avoid translated titles
 headers = {"Accept-Language": "en-US, en;q=0.5"}
 
@@ -144,9 +142,6 @@ print(movies_df.info())
 
 # show head of movies df
 print(movies_df.head())
-
-# save movies dataframe as .csv 
-#movies_df.to_csv('movies_df.csv')
 
 # convert dataframe to dictionary
 movies_dict = movies_df.to_dict('records')
