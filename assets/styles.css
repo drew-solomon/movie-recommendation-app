@@ -6,10 +6,9 @@
     font-family:Helvetica, sans-serif;
     font-stretch: wider;
     font-weight:1000;
-    color:rgb(20, 20, 20);
-    outline-color:grey;
-    background-color:rgba(255, 243, 78, 0.26);
-    style={"width": "100%"};
+    color:black;
+    background: url(https://www.xmple.com/wallpaper/white-red-gradient-linear-1824x2736-c2-ffffff-fa8072-a-90-f-14.svg);
+    background-size: cover;
 }
 
 .slider {
@@ -23,3 +22,4 @@
     flex: auto;
     align-self: center;
 }
+

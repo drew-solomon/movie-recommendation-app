@@ -134,7 +134,7 @@ print(movies_df.info())
 movies_df.head()
 
 # save movies dataframe as .csv 
-movies_df.to_csv('movies_df.csv')
+#movies_df.to_csv('movies_df.csv')
 
 # convert dataframe to dictionary
 movies_dict = movies_df.to_dict('records')
@@ -158,6 +158,4 @@ supabase.table('imdb_top_movies').insert(movies_dict).execute()
 print("inserted movies to Supabase")
 print("Supabase movie count:", len(supabase.table('imdb_top_movies').select('*').execute()['data']))
 
-# save movies dataframe as .csv 
-movies_df.to_csv('movies_df.csv')
 

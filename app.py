@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 import movie_rec # movie recommender functions
 
-# read csv of scraped movies dataframe
-movies_df = pd.read_csv('movies_df.csv')
+# read csv of processed movies dataframe
+movies_df = pd.read_csv('movies_df_proc.csv')
 
 # set marks for slider
 marks = {1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9', 10: '10'}
@@ -19,7 +19,7 @@ app = dash.Dash(__name__)
 app.layout = html.Div(
     className="main",
     children=[
-    html.H2("Movie Recommender",id="title"),
+    html.H2("For You: Movie Recommender",id="title"),
     html.Img(src='https://tritonvoice.co/wp-content/uploads/2019/03/GKKFYsUV3HipHYUtKTrUPeiz.png', style={'height':'60%', 'width':'60%'}),
     html.H3("Find similar movies to the ones you love, from:",id="subtitle"),
     html.A('IMDb Top 1000 Movies (by User Rating)', href='https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating', target="_blank"),
@@ -46,13 +46,14 @@ app.layout = html.Div(
         id='table',
         columns=[],
         data= [],
-        style_cell={'textAlign': 'center'},
-        style_data={'width': '350px'},
+        style_cell={'textAlign': 'center', 'width':220},
         style_header={'fontWeight': 'bold', 
             'font-family':'sans-serif', 
-            'font-size':15, 
-            'color':'dimgray',
+            'font-size':15,
             },
+        style_data={'textAlign': 'center',
+        'font-size':14,
+        'backgroundColor': 'rgb(265, 265, 240)'},
     ),
     html.H4("Enjoy!",id="enjoy"),
     html.Img(src='https://www.cppng.com/file/download/2020-06/23321-9-popcorn-transparent-background.png', style={'height':'60%', 'width':'60%'}),

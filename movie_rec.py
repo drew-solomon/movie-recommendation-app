@@ -35,7 +35,7 @@ def make_urls_links_markdown(df):
     title_links = []
     # loop through and convert to hyperlink markdown format
     for index, url in enumerate(df["movie_url"].to_list()):
-      title = df['movie'][index]
+      title = df['movie_year'][index]
       link = '[' + title + ']' + '(' + str(url) + ')'
       title_links.append(link)
 
@@ -64,6 +64,9 @@ for feature in text_features:
 # combine text features
 movies_df["combined_features"] = movies_df.apply(combine_features,axis=1)
 
+# save processed movies df
+movies_df.to_csv('movies_df_proc.csv')
+
 # function to convert features into movie vectors
 def vectorize(data):
     # create count vectorizer (for text features) which removes English stop-words
@@ -73,7 +76,7 @@ def vectorize(data):
     # convert text vectors to array
     text_vectors = count_matrix.toarray()
     # get numerical features
-    numerical = movies_df[numerical_features].to_numpy()
+    numerical = data[numerical_features].to_numpy()
     # normalize numerical features
     numerical = (numerical - numerical.min(axis=0)) / (numerical.max(axis=0) - numerical.min(axis=0))
     # concatenate text vectors with numerical vectors to create movie vectors
@@ -114,17 +117,15 @@ def get_k_most_similar_movies(movie, K):
     for index in k_similar_movies:
         # get movie title + link from index
         movie_title = movies_df[movies_df.index == index]["title_link"].values[0]
-        # convert 
         # add movie to list of movie names
         movie_recs.append(movie_title)
     # return dataframe of movie recommendations
     return pd.DataFrame({'Recommended Movies': movie_recs})
 
-# example movie recommendation
-test_movie = 'The Dark Knight'
-print("Test movie:", test_movie)
 
 # get test movie recs
-test_movie_recs = get_k_most_similar_movies('The Dark Knight', 10)
-print(test_movie_recs)
+test_movie = 'The Dark Knight'
+test_movie_recs = get_k_most_similar_movies(test_movie, 10)
+assert len(test_movie_recs) == 10
+assert not test_movie_recs.empty
 
