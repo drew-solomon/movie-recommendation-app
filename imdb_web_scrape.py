@@ -127,11 +127,23 @@ movies_df = pd.DataFrame({
     'poster_url': movie_poster_urls
 })
 
+# get list of unique genres
+genres_combined = ' '.join(list(movies_df['genres']))
+genres_list = genres_combined.split(' ')
+unique_genres = list(set((genres_list)))
+
+# loop through each genre and create a column for each 
+for genre in unique_genres:
+    # make genre titles lowercase
+    genre_title = genre.lower() 
+    # one hot encode each row: 1 if it contains genre, 0 if not
+    movies_df[genre_title] = movies_df['genres'].str.contains(genre).astype('int')
+
 # check df info
 print(movies_df.info())
 
 # show head of movies df
-movies_df.head()
+print(movies_df.head())
 
 # save movies dataframe as .csv 
 #movies_df.to_csv('movies_df.csv')
