@@ -1,2 +1,11 @@
 beautifulsoup4
 requests
+dash
+dash-daq
+jupyter
+pandas
+matplotlib
+gdown
+scikit-learn
+supabase_py
+requests
