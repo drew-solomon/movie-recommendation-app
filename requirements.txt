@@ -9,3 +9,4 @@ gdown
 scikit-learn
 supabase_py
 requests
+gunicorn
