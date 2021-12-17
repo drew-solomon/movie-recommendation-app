@@ -8,7 +8,7 @@ import pandas as pd
 import recommend_movie # movie recommender functions
 
 # read csv of processed movies dataframe
-movies_df = pd.read_csv('movies_df_proc.csv')
+movies_df = pd.read_csv('data/movies_df_proc.csv')
 
 # set marks for slider
 marks = {1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9', 10: '10'}
@@ -71,7 +71,7 @@ app.layout = html.Div(
 	)
 def update_output(input_movie, input_k):
     # get dataframe of k most similar movie recs
-    movie_recs_df = movie_rec.get_k_most_similar_movies(input_movie, input_k)
+    movie_recs_df = recommend_movie.get_k_most_similar_movies(input_movie, input_k)
 
     # convert df to dict
     movie_recs_dict = movie_recs_df.to_dict('records')
