@@ -70,7 +70,7 @@ To run the movie recommendation Dash app, follow the following three steps:
     python app.py
     ```
 
-3. Click _“Open Browser”_ on the pop-up below:
+3. Click _“Open Browser”_ on the pop-up below:\
 ![gitpod-instruction-small.png](https://i.postimg.cc/tCNvMWTv/gitpod-instruction-small.png)
 
 
