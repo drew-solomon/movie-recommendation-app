@@ -2,6 +2,7 @@
 
 # Movie Recommendation Dash App
 This live data project contains a Dash app that recommends movies from daily updating IMDb movie data and an accompanying BI dashboard to visualize the movie trends. 
+
 _(Final Project for DATA 1050 - Data Engineering @ Brown University Fall 2021)_
 
 > Run the app from the shared Gitpod [workspace](https://bit.ly/movie-recommendation-app) following the quick [setup](#setup) below.
