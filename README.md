@@ -71,7 +71,7 @@ To run the movie recommendation Dash app, follow the following three steps:
     ```
 
 3. Click _“Open Browser”_ on the pop-up below:
-![Screenshot-2022-11-29-at-23-52-18.png](https://i.postimg.cc/J0qLqnqX/Screenshot-2022-11-29-at-23-52-18.png)
+![gitpod-instruction-small.png](https://i.postimg.cc/tCNvMWTv/gitpod-instruction-small.png)
 
 
 Then, pick any movie you like from the dropdown menu (sorted A-Z) and select the number of recommendations you want using the slider. Enjoy!
