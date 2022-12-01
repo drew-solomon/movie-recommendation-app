@@ -50,12 +50,12 @@ _(Final Project for DATA 1050 - Data Engineering @ Brown University Fall 2021)_
 #### Movie Rec Dash App
 
 
-|![Dash-app-example.png](https://i.postimg.cc/Xq6XrpH6/Dash-app-example.png)
+|![Dash-app-example.png](https://i.postimg.cc/Xq6XrpH6/Dash-app-example.png=500x1000)
 |:--:|
 |*Dash app example with dropdown menu of web-scraped top movies, slider for number of recommendations, and recommendations with links.*|
 
 #### Movie Trends Dashboard (BI)
-|![Movie-trends-dashboard-example.jpg](https://i.postimg.cc/QddCKLbC/Movie-trends-dashboard-example.jpg)]
+|![Movie-trends-dashboard-example.jpg](https://i.postimg.cc/QddCKLbC/Movie-trends-dashboard-example.jpg=1000x500)]
 |:--:|
 |*Interactive dashboard for IMDb top 1000 movies, scraped daily. Illustrates key numbers and trends in the top movies - e.g. top movies and directors as well as the distribution of ratings, genres, and release years.*|
 
