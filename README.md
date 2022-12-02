@@ -13,7 +13,7 @@ _(Final Project for DATA 1050 - Data Engineering @ Brown University Fall 2021)_
 * [Technologies Used](#technologies-used)
 * [Screenshots](#screenshots)
 * [Setup](#setup)
-* [Deliverables](#deliverables)
+* [Featured Deliverables](#featured-deliverables)
 * [Contributing Members](#contributing-members)
 * [Acknowledgements](#acknowledgements)
 
