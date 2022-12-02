@@ -13,7 +13,7 @@ _(Final Project for DATA 1050 - Data Engineering @ Brown University Fall 2021)_
 * [Technologies Used](#technologies-used)
 * [Screenshots](#screenshots)
 * [Setup](#setup)
-* [Featured Deliverables](#featured-deliverables)
+* [Deliverables](#deliverables)
 * [Contributing Members](#contributing-members)
 * [Acknowledgements](#acknowledgements)
 
@@ -77,7 +77,7 @@ To run the movie recommendation Dash app, follow the following three steps:
 Then, pick any movie you like from the dropdown menu (sorted A-Z) and select the number of recommendations you want using the slider. Enjoy!
 
 
-## Featured Deliverables
+## Deliverables
 - Movie recommendation Dash [app](https://bit.ly/movie-recommendation-app)
 - Live interactive _IMDb Top 1000 Movies_ [dashboard](https://8d8e0f5b.us2a.app.preset.io:443/r/2)
 
